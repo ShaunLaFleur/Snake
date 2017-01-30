@@ -6,7 +6,6 @@ body {
 #grid {
   width: 408px;
   height: 408px;
-  border: 5px solid white;
   float: left;
   margin-right: 500px;
 }
@@ -19,7 +18,7 @@ body {
   float:left;  
   border: 5px solid white;
   width: 500px;
-  height: 408;
+  min-height: 398px;
   margin-right: 20px;
   background-color: white;
 }
