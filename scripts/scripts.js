@@ -13,7 +13,7 @@ var snakeDied = false;
 $(document).keydown(function(event){
 // Start game
 if(!gameStart && !snakeDied) {
-    gameOn = setInterval(moveSnake, 200); // Start the moving function.
+    gameOn = setInterval(moveSnake, 100); // Start the moving function.
     appleTime(); // call the apple generating function
     gameStart = true;
 }
@@ -117,18 +117,10 @@ function moveSnake() {
   	}
   	// Uncolor current position
   	$(".cell").eq(snake[i]).css("background-color","white");
-  	// Move the body. This loop moves each position to the position one step in front of it(moving towards the head).
-  	if(i%2 === 0) {
-  		// Store current on temp1
-  		temp1 = snake[i];
-  		// Pull temp2 to current
-  		snake[i] = temp2;
-  	} else {
-  		// Store current on temp2
-  		temp2 = snake[i];
-  		// Pull temp1 to current
-  		snake[i] = temp1;
-  	}
+    // Move body
+    temp2 = snake[i]; // store current position
+    snake[i] = temp1; // take from temp1
+    temp1 = temp2; // set temp1 to your old position
   	// Color new location
   	$(".cell").eq(snake[i]).css("background-color","black");
   }
