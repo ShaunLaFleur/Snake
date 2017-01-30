@@ -46,6 +46,8 @@ $("button").click(function(){
     snakeDied = false;
     gameStart = false;
     snake = [0];
+    score = 0;
+    $("#scount").html("0");
     clearInterval(gameOn);
   // Reopen board
   $(".cell").css("background-color","white");
