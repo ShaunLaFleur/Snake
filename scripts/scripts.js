@@ -1,19 +1,20 @@
-// Note: The snake can not run into it's own tail.
 var snake = [0]; // Each position in the array is it's body segment. So 0 is the head and every position after is the body, with the last being the tail. Values of each position represent position on the grid.
 var posApple;
-var width = 34; // The width of the grid will be used for positional calculations. The grid is 33x33 cells.
+var width = 34; // The width of the grid will be used for positional calculations. The grid is 34x34 cells.
 var direction = "right";
 var moving = "right";
 var apple = 0; // location of the apple
 var gameOn;
 var gameStart = false;
 var snakeDied = false;
+var difficulty = 100; // 150 = easy, 100 = medium and 50 = difficult
+var score = 0;
 
 // Controls
 $(document).keydown(function(event){
 // Start game
 if(!gameStart && !snakeDied) {
-    gameOn = setInterval(moveSnake, 100); // Start the moving function.
+    gameOn = setInterval(moveSnake, difficulty); // Start the moving function.
     appleTime(); // call the apple generating function
     gameStart = true;
 }
@@ -35,6 +36,26 @@ $(document).ready(function(){
 	}
   // Color head position.
 	$(".cell").eq(0).css("background-color","purple");
+});
+
+
+
+// Difficulty Setting & Game Reset
+$("button").click(function(){
+  if(snakeDied || gameStart && confirm("Do you want to reset and start a new game?")) {
+    snakeDied = false;
+    gameStart = false;
+    snake = [0];
+    clearInterval(gameOn);
+  // Reopen board
+  $(".cell").css("background-color","white");
+  // Color head position.
+  $(".cell").eq(0).css("background-color","purple");
+  }
+  if(!gameStart) {
+    $("#diff").html($(this).data("diff"));
+    difficulty = parseInt($(this).data("speed"));
+  }
 });
 
 
@@ -120,19 +141,21 @@ function moveSnake() {
     // Move body
     temp2 = snake[i]; // store current position
     snake[i] = temp1; // take from temp1
-    temp1 = temp2; // set temp1 to your old position
+    temp1 = temp2; // set temp1 to your old position to be passed to the next segment
   	// Color new location
   	$(".cell").eq(snake[i]).css("background-color","black");
   }
 
   // Apple eating and lose code.
   if(snake[0] === apple) {
+    score += snake.length*2;
+    $("#scount").html(score);
     snake.push(lastPos);
     $(".cell").eq(lastPos).css("background-color", "black");
     appleTime();
   } else if(snake.indexOf(snake[0], 1) !== -1) {
-    alert("Aw, fuck! You took a bite out of yourself! That's disgusting!");
-    $(".cell").css("background-color", "red");
+    alert("Aw, fuck! You took a bite out of yourself! That's disgusting! Choose a difficulty to reset the game.");
+    $(".cell").css("background-color", "black");
       clearInterval(gameOn);
       snakeDied = true;
   }

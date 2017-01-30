@@ -1,7 +1,6 @@
 body {
   text-align:center;
   background-color: #403f3f;
-  color: white;
 }
 
 #grid {
@@ -22,20 +21,35 @@ body {
   width: 500px;
   height: 408;
   margin-right: 20px;
+  background-color: white;
 }
 
 ul {
   text-align: left;
+  list-style: none;
 }
 
-h1 {
+li {
+  margin-bottom: 10px;
+  border-bottom: 1px solid #e6e5e5;
+}
+
+#title {
   color: white;
   margin-bottom: 0px;
+}
+
+#score {
+  color: white;
 }
 
 p {
   color: white;
   margin-top: 5px;
+}
+
+button {
+  margin-bottom: 10px;
 }
 
 .cell {

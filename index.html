@@ -7,22 +7,30 @@
 </head>
 <body>
 	<div id="container">
-		<h1>Snake</h1>
+		<h1 id="title">Snake</h1>
 		<p>A HTML, CSS & javascript project</p>
-		<div id="rules">
-			<h1>Rules:</h1>
-			<ul>
-				<li>Press any button to begin moving.</li>
-				<li>Control the snake with your arrow keys.</li>
-				<li>You are allowed to run into walls. Try it out and see what happens!</li>
-				<li>You lose if you collide with yourself.</li>
-				<li>Refresh the page to start a new game.</li>
-				<li>Web application is currently under development and is thus incomplete. Game does function, however, there is no winning condition, point counter or timers yet.</li>
-			<ul>
-		</div>
-		<div id="grid">
+		<p>Difficulty: <span id="diff">Medium</span></p>
+		<button data-diff="Easy" data-speed="150">Easy</button>
+		<button data-diff="Medium" data-speed="100">Medium</button>
+		<button data-diff="Hard" data-speed="50">Hard</button>
+		<div id="divider">
+			<div id="rules">
+				<h1>Rules</h1>
+				<ul>
+					<li>Press any button to start the game.</li>
+					<li>Control the snake with your arrow keys.</li>
+					<li>Running into walls simply spits you out the other side!</li>
+					<li>Be careful not to take a bite out of yourself, if you do, you lose!</li>
+					<li>Eat the apple(green square) to add one segment to your snake. See how long you can become!.</li>
+					<li>You gain 2 points per snake length when eating an apple.</li>
+					<li>Web application is currently under development and is thus incomplete. Game does function, however, there is no winning condition, point counter or timers yet.</li>
+				<ul>
+			</div>
+			<div id="grid">
+			</div>
 		</div>
 	</div>
+	<h1 id="score">Score: <span id="scount">0</span></h1>
 	<script src="scripts/scripts.js"></script>
 </body>
 </html>
