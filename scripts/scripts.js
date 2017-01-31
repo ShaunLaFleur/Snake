@@ -1,14 +1,14 @@
-var snake = [0]; // Each position in the array is it's body segment. So 0 is the head and every position after is the body, with the last being the tail. Values of each position represent position on the grid.
-var posApple;
-var width = 34; // The width of the grid will be used for positional calculations. The grid is 34x34 cells.
-var direction = "right";
-var moving = "right";
-var apple = 0; // location of the apple
-var gameOn;
-var gameStart = false;
-var snakeDied = false;
-var difficulty = 100; // 150 = easy, 100 = medium and 50 = difficult
-var score = 0;
+var snake = [0], // Each position in the array is it's body segment. So 0 is the head and every position after is the body, with the last being the tail. Values of each position represent position on the grid.
+   posApple,
+   width = 34, // The width of the grid will be used for positional calculations. The grid is 34x34 cells.
+   direction = "right",
+   moving = "right",
+   apple = 0, // location of the apple
+   gameOn,
+   gameStart = false,
+   snakeDied = false,
+   difficulty = 100, // 150 = easy, 100 = medium and 50 = difficult
+   score = 0;
 
 // Controls
 $(document).keydown(function(event){
@@ -78,17 +78,9 @@ function moveSnake() {
   // Initialize two temp variables to get the body moving.
   var temp1 = snake[0] // store snake head's position
   var temp2;
-  // If you're just a head, set last position to current head position before moving.
-  if(snake.length === 1) {
-    lastPos = snake[0];
-  }
-
-
   // Move head
   // Uncolor current head cell.
   $(".cell").eq(snake[0]).css("background-color", "white");
-  // Move current position to the right. If it is on the right edge, start back at the far left.
-  
   // Moving right:
   if(direction === "right") {
     moving = "right";
@@ -98,7 +90,6 @@ function moveSnake() {
 	  	snake[0] -= width-1;
 	  }
   }
-
   // Moving left:
   if(direction === "left") {
     moving = "left";
@@ -108,7 +99,6 @@ function moveSnake() {
       snake[0] += width-1;
     }
   }
-
   // Moving Up:
   if(direction === "up") {
     moving = "up";
@@ -118,7 +108,6 @@ function moveSnake() {
       snake[0] += 1122;
     }
   }
-
   // Moving Down:
   if(direction === "down") {
     moving = "down";
@@ -128,16 +117,10 @@ function moveSnake() {
       snake[0] -= 1122;
     }
   }
-
   // Color new head cell.
   $(".cell").eq(snake[0]).css("background-color","purple");
-
   // Move body
   for(i=1; i<snake.length; i++) {
-  	// If this position is the tail, store it's current position. We can then use this stored position to properly position any additional body segments gained from eating an apple.
-  	if(i === snake.length-1) {
-  		lastPos = snake[snake.length-1];
-  	}
   	// Uncolor current position
   	$(".cell").eq(snake[i]).css("background-color","white");
     // Move body
@@ -147,13 +130,12 @@ function moveSnake() {
   	// Color new location
   	$(".cell").eq(snake[i]).css("background-color","black");
   }
-
   // Apple eating and lose code.
   if(snake[0] === apple) {
     score += snake.length*2;
     $("#scount").html(score);
-    snake.push(lastPos);
-    $(".cell").eq(lastPos).css("background-color", "black");
+    snake.push(temp1);
+    $(".cell").eq(temp1).css("background-color", "black");
     appleTime();
   } else if(snake.indexOf(snake[0], 1) !== -1) {
     alert("Aw, fuck! You took a bite out of yourself! That's disgusting! Choose a difficulty to reset the game.");
